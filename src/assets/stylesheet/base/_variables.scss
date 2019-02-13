@@ -1,0 +1,43 @@
+// == Breakpoints ===
+$breakpoints: (
+  small: 480px,
+  medium: 768px,
+  wide: 960px,
+  large: 1024px,
+  largest: 1280px
+);
+$color: (
+  primary: darken(adjust-hue(#51a351, -10), 5%),
+  hover-color: #51a351,
+  secondary: #424242,
+  border: #eeeeee,
+  white: #ffffff,
+  white-c: #fbfbfb,
+  white-e: #eeeeee,
+  rgba-black: rgba(0, 0, 0, 0.07),
+  rgba-black-a: rgba(0, 0, 0, 0.13),
+  gray: #a7a5a5,
+  gray-a: #e8e7e7,
+  gray-b: #f3f3f3,
+  red: #d35344,
+  alert-success-bg: #51a351,
+  alert-success-border: darken(adjust-hue(#51a351, -10), 5%),
+  alert-info-bg: #2f96b4,
+  alert-info-border: darken(adjust-hue(#2f96b4, -10), 7%),
+  alert-warning-bg: #f89406,
+  alert-warning-border: darken(adjust-hue(#f89406, -10), 5%),
+  alert-danger-bg:#bd362f,
+  alert-danger-border: darken(adjust-hue(#bd362f, -10), 5%),
+);
+
+
+$font-size: (
+  xs: 10px,
+  sm: 12px,
+  normal: 14px,
+  md: 20px,
+  lg: 24px,
+);
+$font-family: (
+  body: "montserrat, sans-serif",
+);

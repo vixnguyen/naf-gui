@@ -1,0 +1,31 @@
+.fade-in,
+.fade-out {
+  display: block;
+  opacity: 0.8;
+  top : 18px;
+  right: 15px;
+}
+.fade-in {
+  @include animation(topFadeIn);
+  animation-duration: 0.5s;
+}
+.fade-out {
+  @include animation(fadeOut 3.0s forwards);
+  animation-duration: 0.5s;
+}
+@include keyframes(topFadeIn) {
+  0% {
+    @include transform(translateY(-100%));
+  }
+  100% {
+    @include transform(translateY(0));
+  }
+ }
+ @include keyframes(fadeOut) {
+  0% {
+    @include transform(translateY(0));
+  }
+  100% {
+    @include transform(translateY(-150%));
+  }
+}

@@ -1,0 +1,13 @@
+.footer {
+  // @include box-shadow(0 -1px 10px 0 map-get($color, rgba-black));
+  background: darken(map-get($color, white-c), 2);
+  color: map-get($color, secondary);
+  padding: 29px 10px 20px;
+  text-align: center;
+  position: relative;
+  &::before {
+    @include transform(rotate(180deg));
+    @extend %wavy-border;
+    top: 0;
+  }
+}

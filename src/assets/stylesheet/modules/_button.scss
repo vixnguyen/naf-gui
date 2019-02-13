@@ -1,0 +1,100 @@
+button, .btn {
+  @include transition(all 500ms ease);
+  @include border-radius(3px);
+  border: 1px solid map-get($color, primary);
+  background-color: map-get($color, primary);
+  color: map-get($color, white);
+  padding: 12px 30px;
+  outline: none;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  text-transform: uppercase;
+  zoom: 1;
+  &:disabled, [disabled] {
+    border: 1px solid map-get($color, gray-a) !important;
+    background-color: map-get($color, gray-b) !important;
+    color: map-get($color, gray) !important;
+    cursor: not-allowed;
+  }
+}
+.btn-primary {
+  color: map-get($color, white);
+  border-color: map-get($color, primary);
+  background-color: map-get($color, primary);
+  &:hover {
+    background-color: map-get($color, hover-color);
+  }
+}
+.btn-outline {
+  border-color: map-get($color, border);
+  color: map-get($color, secondary);
+  background-color: map-get($color, white);
+  &:hover {
+    border-color: map-get($color, gray);
+    background-color: map-get($color, white);
+  }
+  &.btn-success {
+    color: map-get($color, primary);
+    border-color: map-get($color, primary);
+    &:hover {
+      color: map-get($color, primary);
+      border-color: map-get($color, primary);
+    }
+  }
+  &.btn-primary {
+    &:hover {
+      color: map-get($color, primary);
+      border-color: map-get($color, primary);
+    }
+  }
+  &.btn-danger {
+    &:hover {
+      color: map-get($color, red);
+      border-color: map-get($color, red);
+    }
+  }
+}
+.btn-sm {
+  padding: 8px 16px;
+  font-size: map-get($font-size, sm);
+}
+.btn-xs {
+  padding: 6px 8px;
+  font-size: map-get($font-size, sm);
+}
+.btn-animated {
+  position: relative;
+  .animated-icon {
+    font-size: 16px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+  .animated-label {
+    opacity: 1;
+  }
+  &.show {
+    .animated-icon {
+      opacity: 1;
+    }
+    .animated-label {
+      opacity: 0;
+    }
+  }
+}
+.btn-group {
+  text-align: center;
+  .btn {
+    margin: 0 4px;
+    &:first-of-type {
+      margin-left: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

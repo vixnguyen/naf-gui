@@ -1,0 +1,48 @@
+.alert {
+  @include border-radius(3px);
+  @include box-shadow(0 0 10px map-get($color, gray));
+  text-align:left;
+  padding: 15px 0;
+  max-width: 300px;
+  right: 15px;
+  position: fixed;
+  z-index: 9999;
+  display: none;
+  transition: transform 5s ease-in-out;
+  box-sizing: border-box;
+  &:hover {
+    @include box-shadow(0 0 10px map-get($color, secondary));
+    opacity: 1;
+    cursor: pointer;
+  }
+  .alert-icon {
+    @include border-radius(50%);
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    line-height: 24px;
+    display: inline-block;
+    font-size: 28px;
+  }
+  .alert-content {
+    padding: 0 25px 0 48px;
+  }
+}
+.alert-success {
+  @include alert-variant(alert-success-bg, alert-success-border, white);
+}
+.alert-info {
+  @include alert-variant(alert-info-bg, alert-info-border,white);
+}
+.alert-warning {
+  @include alert-variant(alert-warning-bg, alert-warning-border, white);
+}
+.alert-danger {
+  @include alert-variant(alert-danger-bg, alert-danger-border, white);
+}
+.alert-undefined {
+  &.fade-out {
+    display: none;
+  }
+}

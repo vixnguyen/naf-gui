@@ -1,0 +1,16 @@
+%clr {
+  &::after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
+%wavy-border {
+  position: absolute;
+  height: 6px;
+  left: 0;
+  right: 0;
+  background: url('../images/wavy-border.png') repeat-x;
+  background-size: auto 100%;
+  content: "";
+}

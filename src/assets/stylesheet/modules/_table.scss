@@ -1,0 +1,47 @@
+
+.table {
+  width: 100%;
+  th {
+    vertical-align: bottom;
+    border-bottom: 1px solid map-get($color, border);
+    font-weight: bold;
+    text-align: left;
+  }
+  tr {
+    &:first-child {
+      th {
+        border-top: 0;
+      }
+    }
+    &:last-child {
+      td {
+        border-bottom: 1px solid map-get($color, border);
+      }
+    }
+  }
+  th, td {
+    padding: 8px 10px;
+    border-top: 1px solid map-get($color, border);
+  }
+
+  &.table-striped {
+    tr {
+      &:nth-child(odd)  {
+        td {
+          background-color: map-get($color, white-c);
+        }
+      }
+      &:nth-child(even)  {
+        td {
+          background-color: map-get($color, white);
+        }
+      }
+    }
+  }
+  &.table-vm {
+    th,
+    td {
+      vertical-align: middle;
+    }
+  }
+}

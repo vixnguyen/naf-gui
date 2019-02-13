@@ -1,0 +1,59 @@
+.contact-form {
+  padding: 40px 160px 45px;
+  background: map-get($color, white-c);
+  margin: 60px 0;
+  border: 1px solid map-get($color, border);
+  border-radius: 3px;
+}
+.list-users {
+  margin: 60px 0;
+}
+.home-title {
+  padding-bottom: 20px;
+  text-transform: uppercase;
+  margin: 0 0 30px;
+  text-align: center;
+  background: url(../images/line_star.png) no-repeat 50% 100%;
+}
+.comment {
+  white-space: pre-wrap;
+  line-height: 1.4;
+  word-break: break-word;
+}
+.view-more {
+  margin-top: 30px;
+}
+.btn-load-more {
+  position: relative;
+  z-index: 2;
+  &:after {
+    @include transition(all 0.3s ease 0s);
+    @include border-radius(5px);
+    content: "";
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 0;
+    position: absolute;
+    z-index: -1;
+    background: map-get($color, hover-color);
+  }
+  &:hover {
+    &:after {
+      width: 100%;
+    }
+  }
+}
+.popup-button-container {
+  display: inline-block;
+  position: relative;
+  margin-left: 10px;
+}
+@include respond-below(small) {
+  .form-group {
+    width: 100%;
+  }
+}
+.empty-data {
+  font-size: map-get($font-size, sm);
+}

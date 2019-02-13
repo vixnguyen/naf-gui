@@ -1,0 +1,73 @@
+// Mixins for build grid
+$grid-columns: 12;
+@mixin build-grid($size) {
+  @for $i from 1 through $grid-columns {
+    @if $size != '' {
+      .col-#{$size}-#{$i} {
+        width: percentage($i / $grid-columns);
+      }
+    } @else {
+      .col-#{$i} {
+        width: percentage($i / $grid-columns);
+      }
+    }
+  }
+}
+// End mixins for build grid
+$grid-gutter: 15px;
+$container-width: 900px;
+.container {
+  @extend %clr;
+  padding-left: $grid-gutter;
+  padding-right: $grid-gutter;
+  margin: 0 auto;
+  max-width: $container-width;
+}
+.row {
+  @extend %clr;
+  margin-left: -$grid-gutter;
+  margin-right: -$grid-gutter;
+  > [class*="col-"] {
+    float: left;
+    padding-left: $grid-gutter;
+    padding-right: $grid-gutter;
+  }
+}
+
+// Remove gutters (margin, padding) of row & col
+.row-no-gutters {
+  margin-left: 0;
+  margin-right: 0;
+  > [class*="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Grid for all screen
+ * Ex: col-1, col-2 */
+@include build-grid('');
+
+/* Grid for screen min-width: $small
+ * Ex: col-small-1, col-small-2 */
+@include respond-above(small) {
+  @include build-grid(small);
+}
+
+/* Grid for screen min-width: $medium
+ * Ex: col-medium-1, col-medium-2 */
+@include respond-above(medium) {
+  @include build-grid(medium);
+}
+
+/* Grid for screen min-width: $large
+ * Ex: col-large-1, col-large-2 */
+@include respond-above(large) {
+  @include build-grid(large);
+}
+
+/* Grid for screen min-width: $largest
+ * Ex: col-largest-1, col-largest-2 */
+@include respond-above(largest) {
+  @include build-grid(largest);
+}

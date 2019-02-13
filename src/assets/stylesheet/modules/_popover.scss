@@ -1,0 +1,51 @@
+
+.popover {
+  @include transform(translateY(10px));
+  @include transition(all .25s ease-out);
+  @include box-shadow(0px 2px 6px map-get($color, rgba-black-a));
+  @include border-radius(3px);
+  position: absolute;
+  bottom: 100%;
+  right: -10px;
+  width: 300px;
+  margin-bottom: 19px;
+  text-align: left;
+  background: map-get($color, white);
+  border: 1px solid map-get($color, border);
+  &:before, &:after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-width: 9px 10px 0;
+    display: block;
+  }
+  &:before {
+    top: 100%;
+    right: 19px;
+    border-color: map-get($color, rgba-black-a) transparent;
+    margin-top: 1px;
+  }
+  &:after {
+    top: 100%;
+    right: 19px;
+    border-color: map-get($color, white) transparent;
+  }
+  .popover-title {
+    @include border-corner-radius(3px, 3px, 0, 0);
+    background-color: map-get($color, white-c);
+    border-bottom: 1px solid map-get($color, white-e);
+    padding: 8px 10px 5px;
+    line-height: 24px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+  .popover-content {
+    padding: 20.5px 10px;
+  }
+  .popover-footer {
+    padding: 12px 10px;
+    border-top: 1px solid map-get($color, white-e);
+    text-align: right;
+  }
+}
