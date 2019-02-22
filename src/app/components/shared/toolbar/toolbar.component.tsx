@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ElectronHelper } from 'app/utils/electron.helper';
+import { Button } from 'app/components/shared/button/button.component';
 
 export namespace Toolbar {
   export interface Props {
@@ -53,12 +54,6 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
         hasNpm: true
       });
     });
-    // npmVersionCmd.stdin.on('data', (data: any) => { 
-    //   console.log (`data in: ${data}`);
-    // });
-    // npmVersionCmd.stderr.on('error', (err: any) => { 
-    //   console.log (err);
-    // });
   }
 
   checkMongod() {
@@ -84,30 +79,24 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
   render() {
     return (
       <section className="btn-group text-right">
-        <button
-          type="button"
-          onClick={this.doIt}
-          className="btn btn-outline btn-default btn-square"
-          disabled={this.state.hasNpm}
-        >
-          Install Npm
-        </button>
-        <button
-          type="button"
-          onClick={this.doIt}
-          className="btn btn-outline btn-default btn-square"
-          disabled={this.state.hasNaf}
-        >
-          Install Naf
-        </button>
-        <button
-          type="button"
-          onClick={this.doIt}
-          className="btn btn-outline btn-default btn-square btn-lg"
-          disabled={this.state.hasMongod}
-        >
-          Install Dependences
-        </button>
+        <Button
+          isAnimated={true}
+          canClick={!this.state.hasNpm}
+          text={`Install Npm`}
+          className={`btn btn-outline btn-default btn-animated btn-square`}
+        />
+        <Button
+          isAnimated={true}
+          canClick={!this.state.hasNaf}
+          text={`Install Naf`}
+          className={`btn btn-outline btn-default btn-animated btn-square`}
+        />
+        <Button
+          isAnimated={true}
+          canClick={!this.state.hasMongod}
+          text={`Install Dependences`}
+          className={`btn btn-outline btn-default btn-animated btn-square btn-lg`}
+        />
         <button
           type="button"
           onClick={this.doIt}
