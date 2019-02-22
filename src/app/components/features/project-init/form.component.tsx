@@ -18,7 +18,6 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
   dialog: any;
   spawn: any;
   app: any;
-  path: any;
 
   constructor(props: ProjectInitForm.Props, state: ProjectInitForm.State) {
     super(props, state);
@@ -88,7 +87,6 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
       properties: ['openDirectory']
     });
     if (path) {
-      this.path = path[0];
       this.state.form.fields['directory'].value = path[0];
     } else {
       // do nothing
@@ -103,6 +101,13 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
     this.setState({ isProcessing: true });
     this.createProject();
   }
+
+  resetForm = () => {
+    this.setState({
+      isProcessing: false,
+      form: this.initForm()
+    });
+  };
 
   /**
    * Handle event change a specific field
@@ -124,30 +129,35 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
   };
 
   createProject = () => {
-    let npmVersionCmd = this.spawn(
+    const projectInfo = this.state.form.data;
+    // define cmd
+    let createScript = this.spawn(
       'naf',
       [ 'init' ],
-      { cwd: this.path }
+      { cwd: projectInfo.directory }
     );
-    npmVersionCmd.stdin.write('xyz\n', 'utf8');
+    // enter value for first question
+    createScript.stdin.write(`${projectInfo.projectName}\n`, 'utf8');
+    // delay action enter value for second question
     setTimeout(() => {
-      npmVersionCmd.stdin.write('xyz\n', 'utf8');
-    }, 3000);
-    npmVersionCmd.stdout.on('data', (data: any) => {
-      console.log(`${npmVersionCmd.stdout._writableState.destroyed}`, npmVersionCmd.stdout._writableState);
-      // npmVersionCmd = null;
+      createScript.stdin.write(`${projectInfo.dbName}\n`, 'utf8');
+    }, 1500);
+    createScript.stdout.on('data', (data: any) => {
       console.log(`data: ${data}`);
     });
-    npmVersionCmd.on('exit', (data: any) => {
-      // npmVersionCmd = null;
-      console.log(`data exit 1: ${data}`);
+    createScript.on('exit', (code: any) => {
+      createScript = null;
+      if (code) {
+        // to do if has an errorerror
+      } else {
+        this.resetForm();
+      }
     });
-    console.log(npmVersionCmd);
   }
 
   render() {
     return (
-      <section className="form">
+      <section className="contact-form">
         <form onSubmit={this.onSubmit} onChange={this.formChange} >
           <div className="row">
             <div className="form-group col-6">
@@ -199,7 +209,15 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
             </div>
           </div>
           <div className="row">
-            <div className="col-12 text-right">
+            <div className="col-12 text-right btn-group">
+              <button
+                className={`btn btn-default ${
+                  this.state.isProcessing ? 'show' : 'hide'
+                }`}
+                disabled={this.state.isProcessing}
+              >
+                Cancel
+              </button>
               <button
                 type="submit"
                 className={`btn btn-primary btn-animated ${
