@@ -10,7 +10,6 @@ button, .btn {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  text-transform: uppercase;
   zoom: 1;
   &:disabled, [disabled] {
     border: 1px solid map-get($color, gray-a) !important;
@@ -96,5 +95,14 @@ button, .btn {
     &:last-of-type {
       margin-right: 0;
     }
+  }
+}
+.btn-square {
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+  box-sizing: border-box;
+  &.btn-lg {
+    width: 132px;
   }
 }

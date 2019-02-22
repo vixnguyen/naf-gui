@@ -6,11 +6,16 @@ export namespace Footer {
   }
 }
 
-export class Footer extends React.Component<Footer.Props> {
+export class Footer extends React.Component {
+
+  constructor(props: any) {
+    super(props);
+  }
+
   render() {
     return (
       <footer className="footer">
-        <p>© Asian Tech 2019 All Rights Reserved</p>
+        <p>© Vix Nguyen All Rights Reserved</p>
       </footer>
     );
   }

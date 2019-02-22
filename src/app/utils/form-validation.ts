@@ -27,36 +27,15 @@ export class FormValidation {
    * @output form is a new form validation
    */
   constructor(form: any) {
-    let fields: any = {};
-    let isValid = true; //default is valid
-    /**
-     * loop and set data for each field
-     */
-    for (let key in form) {
-      fields[key] = {
-        name: key,
-        isValid: false,
-        isTouched: false,
-        value: form[key].value || undefined,
-        rules: form[key].rules || {},
-        errors: {},
-        onChange: this._handleChange
-      };
-      /**
-       * call function to validate each field
-       * if field invalid is detected, set value of form to invalid too
-       */
-      if (!this._fieldValidate(fields[key], false)) {
-        isValid = false;
-      }
-    }
+    const { fields, isValid } = this._fieldsChange(form, false);
     // set data for form validation
     this.form = {
       data: {},
       isValid: isValid,
       isTouched: false,
       fields: fields,
-      fieldChange: this._fieldChange
+      fieldChange: this._fieldChange,
+      validation: this._validation
     };
     return this.form;
   }
@@ -118,7 +97,33 @@ export class FormValidation {
     this._fieldValidate(this.form.fields[name]);
   };
 
-  validation() {
-    return this.form;
+  private _fieldsChange = (form: any, hasChanged: boolean = true) => {
+    let fields: any = hasChanged? form : {};
+    let isValid = true; //default is valid
+    for (let key in form) {
+      if (!hasChanged) {
+        fields[key] = {
+          name: key,
+          isValid: false,
+          isTouched: false,
+          value: form[key].value || undefined,
+          rules: form[key].rules || {},
+          errors: {},
+          onChange: this._handleChange
+        };
+      }
+      /**
+       * call function to validate each field
+       * if field invalid is detected, set value of form to invalid too
+       */
+      if (!this._fieldValidate(fields[key], hasChanged)) {
+        isValid = false;
+      }
+    }
+    return { fields, isValid };
+  }
+
+  private _validation = () => {
+    this._fieldsChange(this.form.fields);
   }
 }
