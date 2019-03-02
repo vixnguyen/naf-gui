@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export namespace ConfirmDialog {
+export namespace Button {
   export interface Props {
     text: string;
     isProcessing?: boolean;
@@ -9,11 +9,12 @@ export namespace ConfirmDialog {
     onClick?: void | string;
     checking?: void | string;
     canClick?: boolean;
+    onValidate?: any;
   }
 }
 
-export class Button extends React.Component<ConfirmDialog.Props> {
-  constructor(props: ConfirmDialog.Props, context?: any) {
+export class Button extends React.Component<Button.Props> {
+  constructor(props: any, context?: any) {
     super(props, context);
   }
 
@@ -21,15 +22,21 @@ export class Button extends React.Component<ConfirmDialog.Props> {
     // to do
   }
 
+  componentDidMount() {
+    // console.log(this.props);
+  }
+
+  componentWillReceiveProps() {
+    console.log(`Changed!!!`);
+  }
+
   render() {
-    const { text, isProcessing, className, onClick, canClick } = this.props;
-    let handleClick: void;
-    if (typeof onClick === 'function') {
-      handleClick = onClick;
-    } else {
-      //
+    const { text, isProcessing, className, canClick, onValidate } = this.props;
+    // console.log(onValidate);
+    if (typeof onValidate === 'function') {
+      onValidate();
     }
-    console.log(handleClick);
+    console.log(`can click`, canClick);
     return (
       <button
         className={`${className} ${isProcessing ? 'show' : 'hide'}`}

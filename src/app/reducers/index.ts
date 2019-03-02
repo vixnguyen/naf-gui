@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { RootState } from './state';
 import { featureReducer } from 'app/components/features/feature.reducers';
 import { alertReducer } from 'app/components/shared/alert/alert.reducers';
+import { cmdReducer } from 'app/reducers/cmd.reducer';
 
 export { RootState };
 
@@ -9,5 +10,6 @@ export { RootState };
 // doesn't go well with redux@4
 export const rootReducer = combineReducers<RootState>({
   ...featureReducer,
+  ...{ appStatus: cmdReducer },
   ...{ notification: alertReducer }
 });

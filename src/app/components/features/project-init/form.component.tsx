@@ -21,10 +21,10 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
 
   constructor(props: ProjectInitForm.Props, state: ProjectInitForm.State) {
     super(props, state);
-    const electron: any = new ElectronHelper();
-    this.dialog = electron.remote.dialog;
-    this.spawn = electron.childProcess.spawn;
-    const { app } = electron.remote;
+    const nodeProcess: any = new ElectronHelper();
+    this.dialog = nodeProcess.electron.remote.dialog;
+    this.spawn = nodeProcess.childProcess.spawn;
+    const { app } = nodeProcess.electron.remote;
     this.app = app;
     // initial state of this component
     this.state = {
@@ -91,7 +91,6 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
     } else {
       // do nothing
     }
-    console.log(this.state.form);
     this.state.form.validation();
     this.formChange();
   }
@@ -211,6 +210,7 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
           <div className="row">
             <div className="col-12 text-right btn-group">
               <button
+                type="button"
                 className={`btn btn-default ${
                   this.state.isProcessing ? 'show' : 'hide'
                 }`}

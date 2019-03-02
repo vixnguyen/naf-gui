@@ -1,105 +1,78 @@
 import * as React from 'react';
-import { ElectronHelper } from 'app/utils/electron.helper';
+import { CmdActions } from 'app/actions/cmd.action';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import { omit } from 'app/utils';
 import { Button } from 'app/components/shared/button/button.component';
 
 export namespace Toolbar {
   export interface Props {
-    //
+    [key: string]: any;
   }
   export interface State {
-    hasNpm: boolean;
-    hasMongod: boolean;
-    hasNaf: boolean;
+    [key: string]: any;
   }
 }
 
-export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
+/**
+ * This decorator help component can communicate with Redux
+ */
+@connect(
+  (state: any): Pick<Toolbar.Props, any> => {
+    // console.log(state)
+    console.log(`toolbar changed!`);
+    return { 
+      appStatus: state.appStatus
+    };
+  },
+  (dispatch: Dispatch): Pick<Button.Props, any> => ({
+    cmdActions: bindActionCreators(omit(CmdActions, 'Type'), dispatch)
+  })
+)
 
-  electron: any;
-  spawn: any;
-  app: any;
+export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
 
   constructor(props: Toolbar.Props, state: Toolbar.State) {
     super(props, state);
-    this.electron = new ElectronHelper();
-    this.spawn = this.electron.childProcess.spawn;
-    const { app } = this.electron.remote;
-    this.app = app;
-    this.state = {
-      hasNpm: false,
-      hasMongod: false,
-      hasNaf: false
-    };
+    setTimeout(() => {
+      console.log(`constructor`);
+      this.props.cmdActions.checkNpm(true);
+    }, 5000);
   }
 
   componentWillMount() {
-    this.checkNpm();
-    this.checkMongod();
-    this.checkNaf();
-  }
-
-  doIt() {
     //
   }
 
-  projectInitiation() {
-    //to do
-  }
-
-  checkNpm() {
-    const atPath = this.app.getPath('desktop');
-    let npmVersionCmd = this.spawn('npm', ['-v', 'Terminal', atPath]);
-    npmVersionCmd.stdout.on('data', (data: any) => { 
-      this.setState({
-        hasNpm: true
-      });
-    });
-  }
-
-  checkMongod() {
-    const atPath = this.app.getPath('desktop');
-    let npmVersionCmd = this.spawn('mongod', ['--version', 'Terminal', atPath]);
-    npmVersionCmd.stdout.on('data', (data: any) => { 
-      this.setState({
-        hasMongod: true
-      });
-    });
-  }
-
-  checkNaf() {
-    const atPath = this.app.getPath('desktop');
-    let npmVersionCmd = this.spawn('naf', ['help', 'Terminal', atPath]);
-    npmVersionCmd.stdout.on('data', (data: any) => { 
-      this.setState({
-        hasNaf: true
-      });
-    });
-  }
-
   render() {
+    let { appStatus, cmdActions } = this.props;
+    // appStatus = appStatus || {};
+    console.log(appStatus);
     return (
       <section className="btn-group text-right">
         <Button
           isAnimated={true}
-          canClick={!this.state.hasNpm}
+          canClick={appStatus.hasNpm}
+          onValidate={cmdActions.checkNpm}
           text={`Install Npm`}
           className={`btn btn-outline btn-default btn-animated btn-square`}
         />
         <Button
           isAnimated={true}
-          canClick={!this.state.hasNaf}
+          canClick={appStatus.hasNaf}
+          onValidate={cmdActions.checkNaf}
           text={`Install Naf`}
           className={`btn btn-outline btn-default btn-animated btn-square`}
         />
         <Button
           isAnimated={true}
-          canClick={!this.state.hasMongod}
+          canClick={appStatus.hasMongod}
+          onValidate={cmdActions.checkMongod}
           text={`Install Dependences`}
           className={`btn btn-outline btn-default btn-animated btn-square btn-lg`}
         />
         <button
           type="button"
-          onClick={this.doIt}
           className="btn btn-outline btn-default btn-square"
         >
           Project Initiation

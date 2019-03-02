@@ -3,7 +3,7 @@ const childProcess = require('child_process')
 
 const port = process.env.PORT ? process.env.PORT - 100 : 2612
 
-process.env.ELECTRON_START_URL = `http://localhost:${port}`
+process.env.ELECTRON_START_URL = `http://127.0.0.1:${port}`
 
 const client = new net.Socket()
 
@@ -14,7 +14,6 @@ const tryConnection = () => {
     () => {
       client.end()
       if (!startedElectron) {
-        console.log('starting electron')
         startedElectron = true
         const exec = childProcess.exec
         exec('npm run electron')
@@ -23,9 +22,10 @@ const tryConnection = () => {
   )
 }
 
+
 tryConnection()
 
 client.on('error', (err) => {
-  console.log(err)
+  // console.log(err)
   setTimeout(tryConnection, 6000)
 })
