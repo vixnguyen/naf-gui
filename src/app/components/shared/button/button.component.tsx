@@ -22,13 +22,6 @@ export class Button extends React.Component<Button.Props> {
     // to do
   }
 
-  componentDidMount() {
-    // console.log(this.props);
-  }
-
-  componentWillReceiveProps() {
-    console.log(`Changed!!!`);
-  }
 
   render() {
     const { text, isProcessing, className, canClick, onValidate } = this.props;
@@ -36,7 +29,7 @@ export class Button extends React.Component<Button.Props> {
     if (typeof onValidate === 'function') {
       onValidate();
     }
-    console.log(`can click`, canClick);
+    // console.log(`can click`, canClick);
     return (
       <button
         className={`${className} ${isProcessing ? 'show' : 'hide'}`}

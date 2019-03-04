@@ -19,8 +19,6 @@ export namespace Toolbar {
  */
 @connect(
   (state: any): Pick<Toolbar.Props, any> => {
-    // console.log(state)
-    console.log(`toolbar changed!`);
     return { 
       appStatus: state.appStatus
     };
@@ -34,39 +32,33 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
 
   constructor(props: Toolbar.Props, state: Toolbar.State) {
     super(props, state);
-    setTimeout(() => {
-      console.log(`constructor`);
-      this.props.cmdActions.checkNpm(true);
-    }, 5000);
   }
 
-  componentWillMount() {
-    //
-  }
+  // componentWillMount() {
+  //   //
+  // }
 
   render() {
     let { appStatus, cmdActions } = this.props;
-    // appStatus = appStatus || {};
-    console.log(appStatus);
     return (
       <section className="btn-group text-right">
         <Button
           isAnimated={true}
-          canClick={appStatus.hasNpm}
-          onValidate={cmdActions.checkNpm}
+          canClick={!!appStatus.hasNpm}
+          onValidate={cmdActions.getNpmVersion}
           text={`Install Npm`}
           className={`btn btn-outline btn-default btn-animated btn-square`}
         />
         <Button
           isAnimated={true}
-          canClick={appStatus.hasNaf}
+          canClick={!!appStatus.hasNaf}
           onValidate={cmdActions.checkNaf}
           text={`Install Naf`}
           className={`btn btn-outline btn-default btn-animated btn-square`}
         />
         <Button
           isAnimated={true}
-          canClick={appStatus.hasMongod}
+          canClick={!!appStatus.hasMongod}
           onValidate={cmdActions.checkMongod}
           text={`Install Dependences`}
           className={`btn btn-outline btn-default btn-animated btn-square btn-lg`}

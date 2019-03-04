@@ -42,34 +42,12 @@ export class App extends React.Component<App.Props> {
     super(props, context);
   }
 
-  checkNpm = () => {
-    setTimeout(() => {
-      console.log(`clicked!!!!`);
-      this.props.cmdActions.checkNaf(true);
-    }, 3000);
-  }
-
-  componentDidMount() {
-    console.log(`app mounted!!!`);
-  }
-
-  componentWillReceiveProps() {
-    console.log(`App Changed!!!`);
-  }
-
   render() {
-    const { alertActions, notification, appStatus } = this.props;
+    const { alertActions, notification } = this.props;
     return (
       <div className="page-wrap">
-        <button
-          type="button"
-          onClick={this.checkNpm}
-          className="btn btn-primary"
-        >
-          Check Npm
-        </button>
         <Alert notification={notification} alerter={alertActions} />
-        <Header appStatus={appStatus} />
+        <Header />
         <div className="container">
           <ProjectInit />
         </div>

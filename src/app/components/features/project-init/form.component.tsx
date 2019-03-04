@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ElectronHelper } from 'app/utils/electron.helper';
 import { FormValidation } from 'app/utils/form-validation';
-import { setTimeout } from 'timers';
 
 export namespace ProjectInitForm {
   export interface Props {
