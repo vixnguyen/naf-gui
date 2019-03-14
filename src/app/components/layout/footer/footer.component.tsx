@@ -14,7 +14,7 @@ export class Footer extends React.Component {
 
   render() {
     return (
-      <footer className="footer">
+      <footer className="footer col-12">
         <p>© Vix Nguyen All Rights Reserved</p>
       </footer>
     );

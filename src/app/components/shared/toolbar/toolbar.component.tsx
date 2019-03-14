@@ -36,45 +36,44 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
     super(props, state);
   }
 
-  // componentWillMount() {
-  //   //
-  // }
   toogleForm = () => {
-    console.log(123);
     this.props.commonActions.toogleForm(true);
   }
 
   render() {
     let { appStatus, cmdActions } = this.props;
     return (
-      <section className="btn-group text-right">
+      <section className="text-center">
         <Button
           isAnimated={true}
           canClick={appStatus.hasNpm}
           onValidate={cmdActions.getNpmVersion}
-          text={`Install Npm`}
+          text={`Install`}
           onClick={cmdActions.installNpm}
-          className={`btn btn-outline btn-default btn-animated btn-square`}
+          img={`./assets/images/resources/node.png`}
+          className={`btn btn-outline btn-default btn-animated btn-block`}
         />
         <Button
           isAnimated={true}
           canClick={appStatus.hasNaf}
           onValidate={cmdActions.getNafVersion}
-          text={`Install Naf`}
+          text={`Install`}
           onClick={cmdActions.installNaf}
-          className={`btn btn-outline btn-default btn-animated btn-square`}
+          img={`./assets/images/resources/node.png`}
+          className={`btn btn-outline btn-default btn-animated btn-block`}
         />
         <Button
           isAnimated={true}
           canClick={appStatus.hasMongod}
           onValidate={cmdActions.getMongodVersion}
-          text={`Install Dependences`}
+          text={`Install`}
           onClick={cmdActions.installMongod}
-          className={`btn btn-outline btn-default btn-animated btn-square btn-lg`}
+          img={`./assets/images/resources/mongodb.png`}
+          className={`btn btn-outline btn-default btn-animated btn-block`}
         />
         <button
           type="button"
-          className="btn btn-outline btn-default btn-square"
+          className="btn btn-outline btn-default btn-block"
           onClick={this.toogleForm}
         >
           Project Initiation

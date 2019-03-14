@@ -10,6 +10,8 @@ export namespace Button {
     checking?: void | string;
     canClick?: boolean;
     onValidate?: any;
+    img?: string;
+    icon?: string;
   }
 }
 
@@ -24,7 +26,7 @@ export class Button extends React.Component<Button.Props> {
 
 
   render() {
-    const { text, isProcessing, className, canClick, onValidate } = this.props;
+    const { text, isProcessing, className, canClick, onValidate, img } = this.props;
     // console.log(onValidate);
     if (typeof onValidate === 'function') {
       onValidate();
@@ -39,7 +41,12 @@ export class Button extends React.Component<Button.Props> {
         <span className="animated-icon">
           <i className="fa fa-spinner fa-spin" />
         </span>
-        <span className="animated-label">{text}</span>
+        <span className="animated-label">
+          {text}
+          {
+            img ? <img className="img" src={img} alt={text} /> : null
+          }
+        </span>
       </button>
     );
   }

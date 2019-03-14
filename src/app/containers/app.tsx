@@ -48,9 +48,7 @@ export class App extends React.Component<App.Props> {
       <div className="page-wrap">
         <Alert notification={notification} alerter={alertActions} />
         <Header />
-        <div className="container">
-          <Main pageData={pageData} />
-        </div>
+        <Main pageData={pageData} />
         <Footer />
       </div>
     );

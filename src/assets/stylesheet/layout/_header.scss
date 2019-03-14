@@ -1,16 +1,21 @@
 
 .page-header {
   // @include box-shadow( 0 2px 5px 0 map-get($color, rgba-black));
-  background: darken(map-get($color, white-c), .9);
-  padding: 20px 0;
+  background: map-get($color, gray-b);
   text-align: center;
   position: relative;
-  // &::before {
-  //   @extend %wavy-border;
-  //   bottom: 0;
-  // }
+  height: 100%;
+  width: $sidebarWidth;
+  float: left;
+  .header-top,
+  .header-toolbar {
+    padding: 15px;
+  }
+  .header-top {
+    background-color: map-get($color, gray-a);
+  }
   .logo {
-    height: 80px;
-    width: auto;
+    height: auto;
+    width: 100%;
   }
 }

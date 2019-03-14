@@ -17,16 +17,12 @@ export class Header extends React.Component<Header.Props, Header.State> {
 
   render() {
     return (
-      <header className="page-header">
-        <div className="container">
-          <div className="row">
-            <div className="col-2 text-left">
-              <img className="logo" src={'./assets/images/logo.png'} alt="Naf" />
-            </div>
-            <div className="col-10 text-right">
-              <Toolbar />
-            </div>
-          </div>
+      <header className="page-header col-2">
+        <div className="header-top">
+          <img className="logo" src={'./assets/images/logo.png'} alt="Naf" />
+        </div>
+        <div className="header-toolbar">
+          <Toolbar />
         </div>
       </header>
     );

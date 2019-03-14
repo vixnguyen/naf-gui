@@ -1,7 +1,7 @@
 export interface RootState {
-  pageData: RootState.PageState;
-  appStatus: RootState.AppStatus;
-  notification: RootState.NotificationState;
+  pageData?: RootState.PageState;
+  appStatus?: RootState.AppStatus;
+  notification?: RootState.NotificationState;
 }
 
 export namespace RootState {
