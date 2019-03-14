@@ -5,7 +5,7 @@ export interface RootState {
 }
 
 export namespace RootState {
-  export type PageState = any[];
+  export type PageState = {};
   export type AppStatus = {
     [key: string]: any;
   };

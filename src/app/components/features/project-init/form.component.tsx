@@ -2,9 +2,9 @@ import * as React from 'react';
 import { ElectronHelper } from 'app/utils/electron.helper';
 import { FormValidation } from 'app/utils/form-validation';
 
-export namespace ProjectInitForm {
+export namespace Form {
   export interface Props {
-    //
+    isVisible: boolean;
   }
   export interface State {
     isProcessing: boolean; // to check the form is submitting or not, it helps handle UI/UX
@@ -12,13 +12,13 @@ export namespace ProjectInitForm {
   }
 }
 
-export class ProjectInitForm extends React.Component<ProjectInitForm.Props, ProjectInitForm.State> {
+export class Form extends React.Component<Form.Props, Form.State> {
 
   dialog: any;
   spawn: any;
   app: any;
 
-  constructor(props: ProjectInitForm.Props, state: ProjectInitForm.State) {
+  constructor(props: Form.Props, state: Form.State) {
     super(props, state);
     const nodeProcess: any = new ElectronHelper();
     this.dialog = nodeProcess.electron.remote.dialog;
@@ -154,7 +154,7 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
   }
 
   render() {
-    return (
+    return this.props.isVisible ? (
       <section className="contact-form">
         <form onSubmit={this.onSubmit} onChange={this.formChange} >
           <div className="row">
@@ -210,7 +210,7 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
             <div className="col-12 text-right btn-group">
               <button
                 type="button"
-                className={`btn btn-default ${
+                className={`btn btn-outline btn-default ${
                   this.state.isProcessing ? 'show' : 'hide'
                 }`}
                 disabled={this.state.isProcessing}
@@ -219,7 +219,7 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
               </button>
               <button
                 type="submit"
-                className={`btn btn-primary btn-animated ${
+                className={`btn btn-outline btn-primary btn-animated ${
                   this.state.isProcessing ? 'show' : 'hide'
                 }`}
                 disabled={this.state.isProcessing || !this.state.form.isValid}
@@ -233,6 +233,6 @@ export class ProjectInitForm extends React.Component<ProjectInitForm.Props, Proj
           </div>
         </form>
       </section>
-    );
+    ) : null;
   }
 }

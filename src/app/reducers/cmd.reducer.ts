@@ -12,7 +12,9 @@ const updateState = (state: any, action: any, key: string) => {
   }
 }
 
-const initialState: RootState.AppStatus = {};
+const initialState: RootState.AppStatus = {
+  isWelcome: true
+};
 
 export const cmdReducer = handleActions<RootState.AppStatus, any>(
   {

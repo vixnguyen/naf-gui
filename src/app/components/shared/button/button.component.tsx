@@ -33,7 +33,7 @@ export class Button extends React.Component<Button.Props> {
     return (
       <button
         className={`${className} ${isProcessing ? 'show' : 'hide'}`}
-        disabled={isProcessing || !canClick}
+        disabled={isProcessing || !!canClick}
         onClick={this.default}
       >
         <span className="animated-icon">

@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router';
 import { RootState } from 'app/reducers';
 import { omit } from 'app/utils';
 import { Header, Footer, Alert } from 'app/components';
-import { ProjectInit } from 'app/components/features/project-init/project-init.component';
+import { Main } from 'app/components/features/project-init/main.component';
 import { AlertActions } from 'app/components/shared/alert/alert.actions';
 import { CmdActions } from 'app/actions/cmd.action';
 
@@ -43,13 +43,13 @@ export class App extends React.Component<App.Props> {
   }
 
   render() {
-    const { alertActions, notification } = this.props;
+    const { alertActions, notification, pageData } = this.props;
     return (
       <div className="page-wrap">
         <Alert notification={notification} alerter={alertActions} />
         <Header />
         <div className="container">
-          <ProjectInit />
+          <Main pageData={pageData} />
         </div>
         <Footer />
       </div>

@@ -7,8 +7,8 @@ $breakpoints: (
   largest: 1280px
 );
 $color: (
-  primary: darken(adjust-hue(#51a351, -10), 5%),
-  hover-color: #51a351,
+  primary: #f47c48,
+  hover-color: #f47c48,
   secondary: #424242,
   border: #eeeeee,
   white: #ffffff,
@@ -20,8 +20,8 @@ $color: (
   gray-a: #e8e7e7,
   gray-b: #f3f3f3,
   red: #d35344,
-  alert-success-bg: #51a351,
-  alert-success-border: darken(adjust-hue(#51a351, -10), 5%),
+  alert-success-bg: #f47c48,
+  alert-success-border: darken(adjust-hue(#f47c48, -10), 5%),
   alert-info-bg: #2f96b4,
   alert-info-border: darken(adjust-hue(#2f96b4, -10), 7%),
   alert-warning-bg: #f89406,
@@ -29,7 +29,6 @@ $color: (
   alert-danger-bg:#bd362f,
   alert-danger-border: darken(adjust-hue(#bd362f, -10), 5%),
 );
-
 
 $font-size: (
   xs: 10px,
