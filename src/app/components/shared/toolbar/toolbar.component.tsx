@@ -34,6 +34,10 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
 
   constructor(props: Toolbar.Props, state: Toolbar.State) {
     super(props, state);
+    // env verifying
+    props.cmdActions.getNpmVersion();
+    props.cmdActions.getNafVersion();
+    props.cmdActions.getMongodVersion();
   }
 
   toogleForm = () => {
@@ -43,11 +47,10 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
   render() {
     let { appStatus, cmdActions } = this.props;
     return (
-      <section className="text-center">
+      <section className="toolbar">
         <Button
           isAnimated={true}
           canClick={appStatus.hasNpm}
-          onValidate={cmdActions.getNpmVersion}
           text={`Install`}
           onClick={cmdActions.installNpm}
           img={`./assets/images/resources/node.png`}
@@ -56,28 +59,27 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
         <Button
           isAnimated={true}
           canClick={appStatus.hasNaf}
-          onValidate={cmdActions.getNafVersion}
           text={`Install`}
           onClick={cmdActions.installNaf}
-          img={`./assets/images/resources/node.png`}
+          img={`./assets/images/resources/naf-circle.png`}
           className={`btn btn-outline btn-default btn-animated btn-block`}
         />
         <Button
           isAnimated={true}
           canClick={appStatus.hasMongod}
-          onValidate={cmdActions.getMongodVersion}
           text={`Install`}
           onClick={cmdActions.installMongod}
           img={`./assets/images/resources/mongodb.png`}
           className={`btn btn-outline btn-default btn-animated btn-block`}
         />
-        <button
-          type="button"
-          className="btn btn-outline btn-default btn-block"
-          onClick={this.toogleForm}
-        >
-          Project Initiation
-        </button>
+        <Button
+          isAnimated={true}
+          canClick={!appStatus.hasNaf}
+          text={``}
+          onClick={cmdActions.installMongod}
+          img={`./assets/images/resources/new-project.png`}
+          className={`btn btn-outline btn-default btn-animated btn-block`}
+        />
       </section>
     );
   }

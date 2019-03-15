@@ -5,16 +5,28 @@ const ELECTRON = new ElectronHelper();
 const atPath = ELECTRON.electron.remote.app.getPath('desktop');
 const cmdFunction = (packageName: string, options: any[], cb: any) => {
   if (ELECTRON.isElectron()) {
-    return (dispatch: any) => {
-      let npmVersionCmd = ELECTRON.childProcess.spawn(packageName, [...options, ...[atPath]]);
-      npmVersionCmd.stdout.on('data', (data: any) => {
-        dispatch(cb(true));
+    return async (dispatch: any) => {
+      let npmVersionCmd = ELECTRON.childProcess.spawn(
+        packageName,
+        options,
+        { cwd: atPath }
+      );
+      await npmVersionCmd.stdout.on('data', (data: any) => {
+        // console.log(`Running...${data}`, );
+        // dispatch(cb(true));
       });
-      npmVersionCmd.stdout.on('error', (error: any) => {
+      await npmVersionCmd.stdout.on('error', (error: any) => {
+        // console.log(`Error: ${error}`);
         //
       });
-      npmVersionCmd.on('exit', (code: any) => {
+      await npmVersionCmd.on('error', (error: any) => {
+        // console.log(`Error: ${error}`);
         //
+      });
+      await npmVersionCmd.on('exit', (code: any) => {
+        // console.log(`Exit: ${code}`);
+        // let result = code ? true : false;
+        dispatch(cb(!code));
       });
     };  
   } else {
@@ -41,13 +53,13 @@ export namespace CmdActions {
     return cmdFunction('mongod', ['--version', 'Terminal'], checkMongod);
   };
   export const installNpm = () => {
-    return cmdFunction('npm', ['install', 'Terminal'], checkMongod);
+    return cmdFunction('npm', ['install'], checkMongod);
   };
   export const installNaf = () => {
-    return cmdFunction('npm', ['install -g @vixnguyen/naf', 'Terminal'], checkMongod);
+    return cmdFunction('npm', ['install', '-g', '@vixnguyen/naf'], checkNaf);
   };
   export const installMongod = () => {
-    return cmdFunction('npm', ['install mongod', 'Terminal'], checkMongod);
+    return cmdFunction('npm', ['install mongod'], checkMongod);
   };
 }
 

@@ -6,37 +6,49 @@ export namespace Button {
     isProcessing?: boolean;
     isAnimated?: boolean;
     className?: string;
-    onClick?: void | string;
+    onClick?: any;
     checking?: void | string;
     canClick?: boolean;
     onValidate?: any;
     img?: string;
     icon?: string;
   }
+  export interface State {
+    [key: string]: any;
+  }
 }
 
-export class Button extends React.Component<Button.Props> {
+export class Button extends React.Component<Button.Props, Button.State> {
   constructor(props: any, context?: any) {
     super(props, context);
+    this.state = {
+      isProcessing: props.isProcessing
+    };
   }
 
-  default = () => {
-    // to do
+  doIt = () => {
+    if (typeof this.props.onClick === 'function') {
+      this.setState({
+        isProcessing: true
+      });
+      this.props.onClick().then((data: any) => {
+        // this.setState({
+        //   isProcessing: false
+        // });
+      });
+    }
   }
 
 
   render() {
-    const { text, isProcessing, className, canClick, onValidate, img } = this.props;
-    // console.log(onValidate);
-    if (typeof onValidate === 'function') {
-      onValidate();
-    }
-    // console.log(`can click`, canClick);
+    const { text, className, canClick, img } = this.props;
+    const { isProcessing } = this.state;
     return (
       <button
         className={`${className} ${isProcessing ? 'show' : 'hide'}`}
         disabled={isProcessing || !!canClick}
-        onClick={this.default}
+        onClick={this.doIt}
+        title={`Install abc`}
       >
         <span className="animated-icon">
           <i className="fa fa-spinner fa-spin" />

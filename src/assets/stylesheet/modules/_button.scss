@@ -65,6 +65,15 @@ button, .btn {
 }
 .btn-animated {
   position: relative;
+  &:disabled,
+  &:hover {
+    .animated-label {
+      .img {
+        -webkit-filter: grayscale(0%);
+        filter: grayscale(0%);
+      }
+    }
+  }
   .animated-icon {
     font-size: 16px;
     position: absolute;
@@ -76,11 +85,13 @@ button, .btn {
   .animated-label {
     opacity: 1;
     .img {
-      width: 32px;
+      width: 36px;
       height: auto;
       display: block;
       text-align: center;
       margin: auto;
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
     }
   }
   &.show {
@@ -89,6 +100,9 @@ button, .btn {
     }
     .animated-label {
       opacity: 0;
+      .img {
+        opacity: 0;
+      }
     }
   }
 }
