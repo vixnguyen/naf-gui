@@ -7,9 +7,7 @@ export namespace Button {
     isAnimated?: boolean;
     className?: string;
     onClick?: any;
-    checking?: void | string;
     canClick?: boolean;
-    onValidate?: any;
     img?: string;
     icon?: string;
   }
@@ -28,17 +26,21 @@ export class Button extends React.Component<Button.Props, Button.State> {
 
   doIt = () => {
     if (typeof this.props.onClick === 'function') {
-      this.setState({
-        isProcessing: true
-      });
-      this.props.onClick().then((data: any) => {
-        // success
+      if (this.props.isAnimated) {
         this.setState({
-          isProcessing: false
+          isProcessing: true
         });
-      }).finally(() => {
-        // finnally
-      });
+        this.props.onClick().then((data: any) => {
+          // success
+          this.setState({
+            isProcessing: false
+          });
+        }).finally(() => {
+          // finnally
+        });
+      } else {
+        this.props.onClick(true);
+      }
     }
   }
 

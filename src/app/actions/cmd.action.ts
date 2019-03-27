@@ -12,15 +12,15 @@ const cmdFunction = (packageName: string, options: any[], cb: any = null) => {
         { cwd: atPath }
       );
       result.stdout.on('data', async (data: any) => {
-        console.log(`Running...${data}`, );
+        // console.log(`Running...${data}`, );
       });
       await new Promise((resolve: any, reject: any) => {
         result.on('error', async (error: any) => {
-          reject('true');
+          // reject('true');
         });
         result.on('exit', (code: number) => {
           dispatch(cb(!code));
-          resolve(true);
+          resolve('true');
         });
       });
     };  

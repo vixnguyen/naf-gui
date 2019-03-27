@@ -35,9 +35,7 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
   constructor(props: Toolbar.Props, state: Toolbar.State) {
     super(props, state);
     // env verifying
-    console.log(props.cmdActions.getNpmVersion().then(() => {
-      console.log('responed!!!');
-    }));
+    props.cmdActions.getNpmVersion();
     props.cmdActions.getNafVersion();
     props.cmdActions.getMongodVersion();
   }
@@ -47,7 +45,7 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
   }
 
   render() {
-    let { appStatus, cmdActions } = this.props;
+    let { appStatus, cmdActions, commonActions } = this.props;
     return (
       <section className="toolbar">
         <Button
@@ -75,10 +73,9 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
           className={`btn btn-outline btn-default btn-animated btn-block`}
         />
         <Button
-          isAnimated={true}
           canClick={!appStatus.hasNaf}
           text={``}
-          onClick={cmdActions.installMongod}
+          onClick={commonActions.toogleForm}
           img={`./assets/images/resources/new-project.png`}
           className={`btn btn-outline btn-default btn-animated btn-block`}
         />
