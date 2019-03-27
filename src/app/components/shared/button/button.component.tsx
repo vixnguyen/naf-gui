@@ -32,9 +32,12 @@ export class Button extends React.Component<Button.Props, Button.State> {
         isProcessing: true
       });
       this.props.onClick().then((data: any) => {
-        // this.setState({
-        //   isProcessing: false
-        // });
+        // success
+        this.setState({
+          isProcessing: false
+        });
+      }).finally(() => {
+        // finnally
       });
     }
   }

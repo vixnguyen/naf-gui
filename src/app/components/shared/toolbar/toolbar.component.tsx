@@ -35,7 +35,9 @@ export class Toolbar extends React.Component<Toolbar.Props, Toolbar.State> {
   constructor(props: Toolbar.Props, state: Toolbar.State) {
     super(props, state);
     // env verifying
-    props.cmdActions.getNpmVersion();
+    console.log(props.cmdActions.getNpmVersion().then(() => {
+      console.log('responed!!!');
+    }));
     props.cmdActions.getNafVersion();
     props.cmdActions.getMongodVersion();
   }

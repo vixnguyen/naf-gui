@@ -1,11 +1,11 @@
 import { Store, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { logger } from 'app/middleware';
+import { logger, listenerMiddleware } from 'app/middleware';
 import { RootState, rootReducer } from 'app/reducers';
 
 export function configureStore(initialState?: RootState): Store<RootState> {
-  let middleware = applyMiddleware(logger, thunk);
+  let middleware = applyMiddleware(logger, listenerMiddleware, thunk);
 
   if (process.env.NODE_ENV !== 'production') {
     middleware = composeWithDevTools(middleware);
